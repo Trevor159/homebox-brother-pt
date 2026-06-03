@@ -19,6 +19,7 @@ RUN apk add --no-cache \
        "Pillow" \
     && apk del python3-dev build-base zlib-dev jpeg-dev libpng-dev freetype-dev
 
+COPY print-label.py /usr/local/bin/print-label.py
 COPY print-label.sh /usr/local/bin/print-label.sh
 RUN chmod +x /usr/local/bin/print-label.sh
 
