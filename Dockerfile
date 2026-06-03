@@ -1,4 +1,5 @@
-FROM ghcr.io/sysadminsmedia/homebox:latest
+ARG HOMEBOX_TAG=latest
+FROM ghcr.io/sysadminsmedia/homebox:${HOMEBOX_TAG}
 
 COPY requirements.txt /tmp/requirements.txt
 
