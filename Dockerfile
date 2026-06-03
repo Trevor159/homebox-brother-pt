@@ -1,5 +1,7 @@
 FROM ghcr.io/sysadminsmedia/homebox:latest
 
+COPY requirements.txt /tmp/requirements.txt
+
 # Build deps for Pillow + runtime libs
 RUN apk add --no-cache \
     python3 \
@@ -12,11 +14,7 @@ RUN apk add --no-cache \
     libpng-dev \
     freetype-dev \
     font-liberation \
-    && pip3 install --break-system-packages --no-cache-dir \
-       "labelprinterkit==0.7.1" \
-       "numpy" \
-       "qrcode" \
-       "Pillow" \
+    && pip3 install --break-system-packages --no-cache-dir -r /tmp/requirements.txt \
     && apk del python3-dev build-base zlib-dev jpeg-dev libpng-dev freetype-dev
 
 COPY print-label.py /usr/local/bin/print-label.py
