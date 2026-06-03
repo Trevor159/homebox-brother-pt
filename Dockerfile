@@ -1,5 +1,5 @@
-ARG HOMEBOX_TAG=latest
-FROM ghcr.io/sysadminsmedia/homebox:${HOMEBOX_TAG}
+ARG HOMEBOX_IMAGE=ghcr.io/sysadminsmedia/homebox:latest
+FROM ${HOMEBOX_IMAGE}
 
 COPY requirements.txt /tmp/requirements.txt
 

@@ -52,7 +52,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            HOMEBOX_TAG=${{ steps.homebox.outputs.docker_tag }}
+            HOMEBOX_IMAGE=ghcr.io/sysadminsmedia/homebox:${{ steps.homebox.outputs.docker_tag }}
           tags: |
             ${{ steps.homebox.outputs.image }}:${{ steps.homebox.outputs.tag }}
             ${{ steps.homebox.outputs.image }}:latest

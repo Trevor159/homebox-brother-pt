@@ -35,7 +35,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            HOMEBOX_TAG=nightly
+            HOMEBOX_IMAGE=ghcr.io/sysadminsmedia/homebox:nightly
           tags: ${{ steps.image.outputs.name }}:nightly
           cache-from: type=gha
           cache-to: type=gha,mode=max
