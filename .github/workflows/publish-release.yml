@@ -29,8 +29,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${{ steps.homebox.outputs.tag }}"
-          exists=$(gh release view "$tag" --repo "${{ github.repository }}" 2>/dev/null && echo true || echo false)
-          echo "exists=$exists" >> "$GITHUB_OUTPUT"
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Log in to GHCR
         if: steps.check.outputs.exists == 'false'
