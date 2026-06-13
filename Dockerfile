@@ -1,12 +1,13 @@
 ARG HOMEBOX_IMAGE=ghcr.io/sysadminsmedia/homebox:latest
 FROM ${HOMEBOX_IMAGE}
 
-COPY requirements.txt /tmp/requirements.txt
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+COPY pyproject.toml uv.lock /tmp/
 
 # Build deps for Pillow + runtime libs
 RUN apk add --no-cache \
     python3 \
-    py3-pip \
     python3-dev \
     build-base \
     zlib-dev \
@@ -15,7 +16,7 @@ RUN apk add --no-cache \
     libpng-dev \
     freetype-dev \
     font-liberation \
-    && pip3 install --break-system-packages --no-cache-dir -r /tmp/requirements.txt \
+    && uv sync --system --frozen --no-cache --project /tmp \
     && apk del python3-dev build-base zlib-dev jpeg-dev libpng-dev freetype-dev
 
 COPY print-label.py /usr/local/bin/print-label.py

@@ -1,0 +1,10 @@
+[project]
+name = "homebox-brother-pt"
+version = "0.1.0"
+description = "Label printer integration for Homebox"
+requires-python = ">=3.11"
+dependencies = [
+    "labelprinterkit==0.7.1",
+    "numpy",
+    "qrcode",
+]
