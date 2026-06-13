@@ -3,6 +3,8 @@ FROM ${HOMEBOX_IMAGE}
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
+ENV UV_SYSTEM_PYTHON=1
+
 COPY pyproject.toml uv.lock /tmp/
 
 # Build deps for Pillow + runtime libs
@@ -16,7 +18,7 @@ RUN apk add --no-cache \
     libpng-dev \
     freetype-dev \
     font-liberation \
-    && UV_SYSTEM_PYTHON=1 uv sync --frozen --no-cache --project /tmp \
+    && uv sync --frozen --no-cache --project /tmp \
     && apk del python3-dev build-base zlib-dev jpeg-dev libpng-dev freetype-dev
 
 COPY print-label.py /usr/local/bin/print-label.py
