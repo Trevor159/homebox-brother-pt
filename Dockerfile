@@ -16,7 +16,7 @@ RUN apk add --no-cache \
     libpng-dev \
     freetype-dev \
     font-liberation \
-    && uv sync --system --frozen --no-cache --project /tmp \
+    && UV_SYSTEM_PYTHON=1 uv sync --frozen --no-cache --project /tmp \
     && apk del python3-dev build-base zlib-dev jpeg-dev libpng-dev freetype-dev
 
 COPY print-label.py /usr/local/bin/print-label.py
